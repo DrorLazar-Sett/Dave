@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Module Test</title>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+      }
+    }
+    </script>
+</head>
+<body>
+    <h1>Module Test</h1>
+    <div id="output"></div>
+    <script type="module">
+        const output = document.getElementById('output');
+        const log = (msg, isError = false) => {
+            const p = document.createElement('p');
+            p.textContent = msg;
+            p.style.color = isError ? 'red' : 'green';
+            output.appendChild(p);
+        };
+
+        async function testModule(path, name) {
+            try {
+                await import(path);
+                log(`✓ ${name} loaded successfully`);
+                return true;
+            } catch (err) {
+                log(`✗ ${name} error: ${err.message}`, true);
+                console.error(`${name} error:`, err);
+                return false;
+            }
+        }
+
+        async function runTests() {
+            log('Testing module imports...');
+            
+            // Test shared filters first
+            await testModule('./shared/filters.js', 'shared/filters.js');
+            
+            // Test utility modules
+            await testModule('./utils/memoryManager.js', 'memoryManager');
+            await testModule('./utils/fileTypeDetector.js', 'fileTypeDetector');
+            await testModule('./utils/errorHandler.js', 'errorHandler');
+            await testModule('./utils/debounce.js', 'debounce');
+            
+            // Test handlers
+            await testModule('./handlers/BaseAssetHandler.js', 'BaseAssetHandler');
+            await testModule('./handlers/AssetHandlerFactory.js', 'AssetHandlerFactory');
+            
+            // Test main modules
+            await testModule('./ui.js', 'ui.js');
+            await testModule('./asset_loading.js', 'asset_loading.js');
+            await testModule('./tree_folder_view.js', 'tree_folder_view.js');
+            await testModule('./main.js', 'main.js');
+        }
+
+        runTests();
+    </script>
+</body>
+</html>

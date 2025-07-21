@@ -1,0 +1,33 @@
+{
+  "name": "dave-digital-assets-viewer",
+  "version": "1.0.0",
+  "description": "Digital Assets Viewer Extraordinaire - A client-side web application for viewing and managing digital assets",
+  "main": "src/index.html",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/server.cjs",
+    "test": "cd tests && npm test",
+    "test:install": "cd tests && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/Dave.git"
+  },
+  "keywords": [
+    "digital-assets",
+    "viewer",
+    "3d-models",
+    "media-viewer",
+    "file-viewer",
+    "asset-management"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/Dave/issues"
+  },
+  "homepage": "https://github.com/yourusername/Dave#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

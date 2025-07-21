@@ -1,0 +1,49 @@
+{
+  "name": "digital-asset-viewer-tests",
+  "version": "1.0.0",
+  "description": "Comprehensive test suite for Dave - Digital Assets Viewer Extraordiner",
+  "type": "module",
+  "scripts": {
+    "test": "node run_tests.js",
+    "test:file-loading": "playwright test test_file_loading.js",
+    "test:ui": "playwright test test_ui_interactions.js",
+    "test:keyboard": "playwright test test_keyboard_navigation.js",
+    "test:memory": "playwright test test_memory_performance.js",
+    "test:errors": "playwright test test_error_handling.js",
+    "test:watch": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "install": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  },
+  "playwright": {
+    "testDir": ".",
+    "testMatch": "test_*.js",
+    "timeout": 30000,
+    "retries": 0,
+    "workers": 1,
+    "use": {
+      "baseURL": "http://localhost:8080",
+      "headless": true,
+      "viewport": { "width": 1280, "height": 720 },
+      "ignoreHTTPSErrors": true,
+      "video": "retain-on-failure",
+      "screenshot": "only-on-failure",
+      "trace": "retain-on-failure"
+    },
+    "projects": [
+      {
+        "name": "chromium",
+        "use": { "browserName": "chromium" }
+      }
+    ],
+    "reporter": [
+      ["list"],
+      ["json", { "outputFile": "test-results.json" }],
+      ["html", { "open": "never" }]
+    ]
+  }
+}

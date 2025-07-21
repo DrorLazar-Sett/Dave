@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="369.51172"
+   height="490.73047"
+   viewBox="0 0 97.766642 129.8391"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="computer_icon_cc0.svg">
+  <title
+     id="title836">computer icon</title>
+  <defs
+     id="defs2">
+    <linearGradient
+       id="HiGHmed_grey-light"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#8a8a8a;stop-opacity:1;"
+         offset="0"
+         id="stop2060" />
+    </linearGradient>
+    <linearGradient
+       id="HiGHmed_grey"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#4d5968;stop-opacity:1;"
+         offset="0"
+         id="stop2054" />
+    </linearGradient>
+    <linearGradient
+       id="HiGHmed_lightblue-5"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#35a8e0;stop-opacity:1;"
+         offset="0"
+         id="stop2048" />
+    </linearGradient>
+    <linearGradient
+       id="HiGHmed_lightblue">
+      <stop
+         style="stop-color:#3b5c23;stop-opacity:1;"
+         offset="0"
+         id="stop2042" />
+    </linearGradient>
+    <linearGradient
+       id="HiGHmed_darkblue"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#29235c;stop-opacity:1;"
+         offset="0"
+         id="stop2014" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.94654812"
+     inkscape:cx="138.85688"
+     inkscape:cy="62.475203"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1142"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     units="px"
+     fit-margin-top="10"
+     fit-margin-left="10"
+     fit-margin-right="10"
+     fit-margin-bottom="10" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>computer icon</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Markus Suhr, ORCID: https://orcid.org/0000-0002-6307-3253</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Public Domain</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:date>2018-09-24</dc:date>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-52.679019,-14.790372)">
+    <path
+       style="opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.52916664;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 68.947792,17.436205 c -7.547075,0 -13.62294,6.075865 -13.62294,13.62294 V 128.3607 c 0,7.54707 6.075865,13.62294 13.62294,13.62294 H 134.1774 c 7.54708,0 13.62243,-6.07587 13.62243,-13.62294 V 31.059145 c 0,-7.547075 -6.07535,-13.62294 -13.62243,-13.62294 z m 6.629054,13.633791 h 51.971504 c 1.36109,0 2.45721,1.096123 2.45721,2.457214 v 8.504391 c 0,1.361093 -1.09612,2.456699 -2.45721,2.456699 H 75.576846 c -1.361096,0 -2.457215,-1.095606 -2.457215,-2.456699 V 33.52721 c 0,-1.361091 1.096119,-2.457214 2.457215,-2.457214 z m 0,21.99814 h 51.971504 c 1.36109,0 2.45721,1.096121 2.45721,2.457215 v 8.504391 c 0,1.36109 -1.09612,2.456696 -2.45721,2.456696 H 75.576846 c -1.361096,0 -2.457215,-1.095606 -2.457215,-2.456696 v -8.504391 c 0,-1.361094 1.096119,-2.457215 2.457215,-2.457215 z m 0,21.998657 h 51.971504 c 1.36109,0 2.45721,1.095605 2.45721,2.456699 v 8.50439 c 0,1.361088 -1.09612,2.456696 -2.45721,2.456696 H 75.576846 c -1.361096,0 -2.457215,-1.095608 -2.457215,-2.456696 v -8.50439 c 0,-1.361094 1.096119,-2.456699 2.457215,-2.456699 z"
+       id="rect815"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

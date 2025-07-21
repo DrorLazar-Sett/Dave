@@ -1,0 +1,57 @@
+3D Model License Information
+============================
+
+All models in this directory are copyright-free and can be used for any purpose.
+
+1. duck.glb
+   Source: Khronos Group glTF Sample Models
+   URL: https://github.com/KhronosGroup/glTF-Sample-Models
+   License: Public Domain / CC0
+   Description: Classic rubber duck model in GLB format
+
+2. box.gltf (with Box0.bin)
+   Source: Khronos Group glTF Sample Models
+   URL: https://github.com/KhronosGroup/glTF-Sample-Models
+   License: Public Domain / CC0
+   Description: Simple box model in GLTF format with separate binary data
+
+3. teapot.obj
+   Source: Common 3D Test Models Repository
+   URL: https://github.com/alecjacobson/common-3d-test-models
+   License: Public Domain
+   Description: Classic Utah teapot model in OBJ format
+
+4. cube.stl (renamed from slotted_disk.stl)
+   Source: Three.js Examples
+   URL: https://github.com/mrdoob/three.js
+   License: MIT License
+   Description: Slotted disk model in STL ASCII format
+
+5. dolphin.ply
+   Source: Three.js Examples
+   URL: https://github.com/mrdoob/three.js
+   License: MIT License
+   Description: Dolphin model in PLY ASCII format
+
+6. cube.dae (renamed from abb_irb52_7_120.dae)
+   Source: Three.js Examples
+   URL: https://github.com/mrdoob/three.js
+   License: MIT License
+   Description: Industrial robot arm model in Collada DAE format
+
+7. simple-cube.fbx
+   Source: Created for demonstration
+   License: Public Domain / CC0
+   Description: Simple cube model in ASCII FBX format
+
+8. portalgun.3ds
+   Source: Three.js Examples
+   URL: https://github.com/mrdoob/three.js
+   License: MIT License
+   Description: Portal gun model in 3DS format
+
+Notes:
+- All models are suitable for commercial and non-commercial use
+- Models from Three.js are under MIT license which allows free use with attribution
+- Models from Khronos and other sources marked as Public Domain/CC0 require no attribution
+- File sizes have been kept reasonable for demonstration purposes

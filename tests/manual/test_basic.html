@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Test</title>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+      }
+    }
+    </script>
+</head>
+<body>
+    <h1>Basic Module Load Test</h1>
+    <div id="output"></div>
+    <script type="module">
+        const output = document.getElementById('output');
+        
+        try {
+            // Test if basic module syntax works
+            output.innerHTML += '<p>Testing basic module functionality...</p>';
+            
+            // Test import
+            const testModule = await import('./shared/filters.js');
+            output.innerHTML += '<p style="color:green">✓ Basic module import works</p>';
+            
+            // Check if activeFilters is available
+            if (window.activeFilters) {
+                output.innerHTML += '<p style="color:green">✓ window.activeFilters is available</p>';
+                output.innerHTML += `<p>Active filters: ${[...window.activeFilters].join(', ')}</p>`;
+            } else {
+                output.innerHTML += '<p style="color:red">✗ window.activeFilters is NOT available</p>';
+            }
+            
+        } catch (err) {
+            output.innerHTML += `<p style="color:red">✗ Error: ${err.message}</p>`;
+            console.error('Error:', err);
+        }
+    </script>
+</body>
+</html>

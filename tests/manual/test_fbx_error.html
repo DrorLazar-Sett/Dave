@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FBX Error Test</title>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+      }
+    }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+        }
+        .test-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .test-viewer {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #444;
+            position: relative;
+            background: #222;
+        }
+        .test-case {
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .test-case h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .status.success { background: #2e7d32; }
+        .status.error { background: #d32f2f; }
+        .status.loading { background: #1976d2; }
+    </style>
+</head>
+<body>
+    <h1>FBX Viewer Error Handling Test</h1>
+    <p>This tests the error handling improvements for FBX loading.</p>
+    
+    <div class="test-container">
+        <!-- Test 1: Valid FBX URL -->
+        <div class="test-case">
+            <h3>Test 1: Valid FBX</h3>
+            <div id="viewer1" class="test-viewer"></div>
+            <div id="status1" class="status loading">Loading...</div>
+        </div>
+        
+        <!-- Test 2: Invalid URL -->
+        <div class="test-case">
+            <h3>Test 2: Invalid URL (404)</h3>
+            <div id="viewer2" class="test-viewer"></div>
+            <div id="status2" class="status loading">Loading...</div>
+        </div>
+        
+        <!-- Test 3: Wrong file type -->
+        <div class="test-case">
+            <h3>Test 3: Wrong File Type</h3>
+            <div id="viewer3" class="test-viewer"></div>
+            <div id="status3" class="status loading">Loading...</div>
+        </div>
+        
+        <!-- Test 4: Corrupt/Invalid FBX -->
+        <div class="test-case">
+            <h3>Test 4: Malformed FBX</h3>
+            <div id="viewer4" class="test-viewer"></div>
+            <div id="status4" class="status loading">Loading...</div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import FBXViewer from './viewer_fbx.js';
+        
+        // Test cases
+        const tests = [
+            {
+                id: 1,
+                name: 'Valid FBX',
+                url: 'https://threejs.org/examples/models/fbx/Samba Dancing.fbx',
+                expectedResult: 'success'
+            },
+            {
+                id: 2,
+                name: 'Invalid URL (404)',
+                url: 'https://example.com/nonexistent.fbx',
+                expectedResult: 'error'
+            },
+            {
+                id: 3,
+                name: 'Wrong File Type',
+                url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                expectedResult: 'error'
+            },
+            {
+                id: 4,
+                name: 'Malformed FBX',
+                url: 'data:text/plain;base64,VGhpcyBpcyBub3QgYW4gRkJYIGZpbGU=',
+                expectedResult: 'error'
+            }
+        ];
+        
+        // Run tests
+        tests.forEach(test => {
+            const viewerDiv = document.getElementById(`viewer${test.id}`);
+            const statusDiv = document.getElementById(`status${test.id}`);
+            
+            const viewer = new FBXViewer(viewerDiv, { enableZoom: false });
+            
+            viewer.onLoadError = (error) => {
+                console.error(`Test ${test.id} error:`, error);
+                statusDiv.textContent = `Error: ${error.message || 'Unknown error'}`;
+                statusDiv.className = 'status error';
+                
+                // Show error in viewer
+                viewerDiv.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#ff5252;">
+                    <div style="text-align:center;">
+                        <div style="font-size:48px;margin-bottom:10px;">⚠️</div>
+                        <div>Error loading FBX</div>
+                        <div style="font-size:12px;margin-top:5px;">${error.message || 'Unknown error'}</div>
+                    </div>
+                </div>`;
+            };
+            
+            // Add success handler
+            const originalLoadModel = viewer.loadModel.bind(viewer);
+            viewer.loadModel = function(url) {
+                const startTime = Date.now();
+                originalLoadModel(url);
+                
+                // Check for success after a timeout
+                setTimeout(() => {
+                    if (!viewer.isLoading && statusDiv.className.includes('loading')) {
+                        statusDiv.textContent = 'Success: Model loaded';
+                        statusDiv.className = 'status success';
+                    }
+                }, 2000);
+            };
+            
+            viewer.loadModel(test.url);
+        });
+    </script>
+</body>
+</html>

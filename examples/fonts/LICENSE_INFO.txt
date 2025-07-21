@@ -1,0 +1,51 @@
+Font License Information
+========================
+
+All fonts in this directory are copyright-free and open source.
+
+1. Roboto-Regular.ttf
+   - Source: Fontsource/jsDelivr CDN (originally from Google Fonts)
+   - License: Apache License 2.0
+   - Designer: Christian Robertson
+
+2. OpenSans-Regular.ttf
+   - Source: Fontsource/jsDelivr CDN (originally from Google Fonts)
+   - License: Apache License 2.0
+   - Designer: Steve Matteson
+
+3. SourceSansPro-Regular.otf
+   - Source: Adobe Fonts (https://github.com/adobe-fonts/source-sans)
+   - License: SIL Open Font License 1.1
+   - Designer: Paul D. Hunt
+
+4. Merriweather-Regular.otf
+   - Source: Sorkin Type (https://github.com/SorkinType/Merriweather)
+   - License: SIL Open Font License 1.1
+   - Designer: Eben Sorkin
+
+5. Inter-Regular.woff2
+   - Source: Inter Font (https://github.com/rsms/inter)
+   - License: SIL Open Font License 1.1
+   - Designer: Rasmus Andersson
+
+6. Montserrat-Regular.woff2
+   - Source: Montserrat Font (https://github.com/JulietaUla/Montserrat)
+   - License: SIL Open Font License 1.1
+   - Designer: Julieta Ulanovsky
+
+7. FiraSans-Regular.woff
+   - Source: Mozilla Fira (https://github.com/mozilla/Fira)
+   - License: SIL Open Font License 1.1
+   - Designer: Carrois Apostrophe
+
+8. SpaceMono-Regular.woff
+   - Source: Fontsource/jsDelivr CDN
+   - License: SIL Open Font License 1.1
+   - Designer: Colophon Foundry
+
+9. JetBrainsMono-Regular.woff2
+   - Source: Fontsource/jsDelivr CDN
+   - License: SIL Open Font License 1.1
+   - Designer: JetBrains
+
+All fonts can be freely used in personal and commercial projects.

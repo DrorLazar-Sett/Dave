@@ -1,0 +1,40 @@
+Video Files Source Information
+==============================
+
+1. big_buck_bunny_240p.webm (29.0 MB)
+   Source: Wikimedia Commons
+   URL: https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c0/Big_Buck_Bunny_4K.webm/Big_Buck_Bunny_4K.webm.240p.vp9.webm
+   License: Creative Commons Attribution 3.0
+   Description: Big Buck Bunny animated short film trailer
+
+2. sample_640x360.mp4 (30.0 MB)
+   Source: Sample Videos
+   URL: https://sample-videos.com/video321/mp4/240/big_buck_bunny_240p_30mb.mp4
+   License: Public Domain / Test File
+   Description: Big Buck Bunny sample in MP4 format
+
+3. sample_video.mp4 (771 KB)
+   Source: W3Schools
+   URL: https://www.w3schools.com/html/mov_bbb.mp4
+   License: Educational Use / Public Domain
+   Description: Small MP4 sample for web testing
+
+4. archive_sample.avi (143 KB)
+   Source: Internet Archive
+   URL: https://archive.org/download/WildlifeSampleVideo/Wildlife.avi (partial download)
+   License: Public Domain
+   Description: Wildlife sample video in AVI format
+
+5. bunny_sample.mkv (4.0 MB)
+   Source: GitHub bower-media-samples
+   URL: https://github.com/bower-media-samples/big-buck-bunny-480p-30s/raw/master/video.mp4
+   License: Creative Commons
+   Description: Big Buck Bunny 30-second clip in MKV container
+
+6. sample.mov (562 KB)
+   Source: File Samples
+   URL: https://filesamples.com/samples/video/mov/sample_640x360.mov
+   License: Free for testing
+   Description: Sample MOV file for testing
+
+Note: All videos are copyright-free and suitable for testing purposes.

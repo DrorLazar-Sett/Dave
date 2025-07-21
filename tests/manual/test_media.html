@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Media Test</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+      }
+    }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; border: 1px solid #ccc; padding: 10px; }
+        model-viewer { width: 300px; height: 300px; }
+        audio { display: block; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Media Type Test</h1>
+    
+    <div class="test-section">
+        <h2>Audio Test</h2>
+        <p>Drop audio files here to test (MP3, WAV, OGG):</p>
+        <input type="file" id="audioFile" accept=".mp3,.wav,.ogg" />
+        <div id="audioContainer"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>GLB Model Test</h2>
+        <p>Drop GLB file here to test:</p>
+        <input type="file" id="glbFile" accept=".glb" />
+        <div id="glbContainer"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>FBX Model Test (Three.js)</h2>
+        <p>Drop FBX file here to test:</p>
+        <input type="file" id="fbxFile" accept=".fbx" />
+        <div id="fbxContainer"></div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+        
+        // Audio test
+        document.getElementById('audioFile').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const audio = document.createElement('audio');
+                audio.controls = true;
+                audio.src = URL.createObjectURL(file);
+                document.getElementById('audioContainer').innerHTML = '';
+                document.getElementById('audioContainer').appendChild(audio);
+                console.log('Audio file loaded:', file.name, file.type);
+            }
+        });
+        
+        // GLB test
+        document.getElementById('glbFile').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const modelViewer = document.createElement('model-viewer');
+                modelViewer.src = URL.createObjectURL(file);
+                modelViewer.setAttribute('camera-controls', '');
+                modelViewer.setAttribute('auto-rotate', '');
+                document.getElementById('glbContainer').innerHTML = '';
+                document.getElementById('glbContainer').appendChild(modelViewer);
+                console.log('GLB file loaded:', file.name);
+            }
+        });
+        
+        // FBX test
+        document.getElementById('fbxFile').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const container = document.getElementById('fbxContainer');
+                container.innerHTML = '<div id="fbxScene" style="width:300px;height:300px;"></div>';
+                
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer();
+                renderer.setSize(300, 300);
+                document.getElementById('fbxScene').appendChild(renderer.domElement);
+                
+                const light = new THREE.AmbientLight(0xffffff);
+                scene.add(light);
+                
+                camera.position.z = 5;
+                
+                const loader = new FBXLoader();
+                const url = URL.createObjectURL(file);
+                loader.load(url, (fbx) => {
+                    scene.add(fbx);
+                    console.log('FBX loaded successfully:', file.name);
+                    
+                    function animate() {
+                        requestAnimationFrame(animate);
+                        fbx.rotation.y += 0.01;
+                        renderer.render(scene, camera);
+                    }
+                    animate();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

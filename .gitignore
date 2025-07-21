@@ -1,0 +1,64 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/tmp
+/out-tsc
+
+dist
+recordings
+trash
+*.blend1
+.idea
+
+# dependencies
+/node_modules
+node_modules
+
+# IDEs and editors
+.idea
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+# /package-lock.json
+/.sass-cache
+/connect.lock
+/coverage
+junit.xml
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# SASS CACHE
+.sass-cache
+
+project
+declarationsDir.temp
+.cache
+docs/.vuepress/.cache
+docs/.vuepress/.temp
+docs/.vuepress/dist
+.env
+/ssl
+.aider*

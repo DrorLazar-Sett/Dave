@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dave - Digital Assets Viewer Extraordinaire</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      text-align: center;
+      max-width: 600px;
+      background-color: #2a2a2a;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      color: #9b77ff;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #888;
+      margin-bottom: 30px;
+    }
+    .status {
+      padding: 20px;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    .checking {
+      background-color: #3a3a4a;
+      border: 1px solid #4a4a5a;
+    }
+    .error {
+      background-color: #4a3a3a;
+      border: 1px solid #5a4a4a;
+      color: #ff7777;
+    }
+    .success {
+      background-color: #3a4a3a;
+      border: 1px solid #4a5a4a;
+      color: #77ff77;
+    }
+    code {
+      background-color: #1a1a1a;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    .instructions {
+      text-align: left;
+      background-color: #3a3a4a;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .instructions h3 {
+      margin-top: 0;
+      color: #9b77ff;
+    }
+    .instructions ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    .instructions li {
+      margin: 8px 0;
+    }
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #444;
+      border-top-color: #9b77ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>D.A.V.E</h1>
+    <p class="subtitle">Digital Assets Viewer Extraordinaire</p>
+    
+    <div id="status" class="status checking">
+      <span class="spinner"></span>
+      Checking if server is running...
+    </div>
+    
+    <div class="instructions">
+      <h3>How to Start Dave:</h3>
+      <ol>
+        <li>Open a terminal/command prompt</li>
+        <li>Navigate to the Dave directory</li>
+        <li>Run one of these commands:
+          <ul>
+            <li><strong>Windows:</strong> <code>scripts\Dave.bat</code></li>
+            <li><strong>Mac/Linux:</strong> <code>./scripts/Dave.sh</code></li>
+            <li><strong>Or directly:</strong> <code>node scripts/server.cjs</code></li>
+          </ul>
+        </li>
+        <li>The application will open at <code>http://localhost:7777/</code></li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    // Check if server is running and redirect if it is
+    function checkServer() {
+      const statusEl = document.getElementById('status');
+      
+      fetch('http://localhost:7777/')
+        .then(response => {
+          if (response.ok) {
+            statusEl.className = 'status success';
+            statusEl.innerHTML = '✓ Server is running! Redirecting...';
+            setTimeout(() => {
+              window.location.href = 'http://localhost:7777/';
+            }, 1000);
+          }
+        })
+        .catch(error => {
+          statusEl.className = 'status error';
+          statusEl.innerHTML = '✗ Server is not running. Please start it using the instructions below.';
+          
+          // Check again in 3 seconds
+          setTimeout(checkServer, 3000);
+        });
+    }
+    
+    // Start checking immediately
+    checkServer();
+  </script>
+</body>
+</html>
