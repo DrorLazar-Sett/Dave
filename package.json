@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/Dave.git"
+    "url": "git+https://github.com/drorlazar-sett/Dave.git"
   },
   "keywords": [
     "digital-assets",
@@ -24,9 +24,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yourusername/Dave/issues"
+    "url": "https://github.com/drorlazar-sett/Dave/issues"
   },
-  "homepage": "https://github.com/yourusername/Dave#readme",
+  "homepage": "https://drorlazar-sett.github.io/Dave/",
   "engines": {
     "node": ">=14.0.0"
   }

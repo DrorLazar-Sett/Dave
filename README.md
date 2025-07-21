@@ -2,12 +2,13 @@
 
 A powerful web-based viewer for digital assets including 3D models, videos, audio files, and images.
 
-> ⚠️ **IMPORTANT: This application requires a local server to run!**
-> 
-> Dave cannot be opened directly as a file in your browser due to security restrictions with JavaScript modules.
-> You must start the server first using one of the methods below.
+## Live Demo
 
-## Quick Start
+🌐 **[Try Dave Online](https://drorlazar-sett.github.io/Dave/)** - No installation required!
+
+## Local Development
+
+For local development with full server capabilities:
 
 ```bash
 # Start the application
@@ -19,8 +20,6 @@ scripts\Dave.bat     # Windows
 ```
 
 Then open http://localhost:7777/ in your browser.
-
-**Note:** If you accidentally open `index.html` or `src/index.html` directly in your browser, you'll see instructions on how to properly start the server.
 
 ## Documentation
 

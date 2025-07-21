@@ -1,148 +1,289 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-mode">
 <head>
-  <meta charset="UTF-8">
-  <title>Dave - Digital Assets Viewer Extraordinaire</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
+  <meta charset="UTF-8" />
+  <title>Dave - Digital Assets Viewer Extraordiner</title>
+
+  <script>
+    // Check if user has explicitly chosen light mode
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.remove('dark-mode');
     }
-    .container {
-      text-align: center;
-      max-width: 600px;
-      background-color: #2a2a2a;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  </script>
+
+  <!-- Import map for Three.js modules -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+      }
     }
-    h1 {
-      color: #9b77ff;
-      margin-bottom: 10px;
-    }
-    .subtitle {
-      color: #888;
-      margin-bottom: 30px;
-    }
-    .status {
-      padding: 20px;
-      border-radius: 5px;
-      margin: 20px 0;
-    }
-    .checking {
-      background-color: #3a3a4a;
-      border: 1px solid #4a4a5a;
-    }
-    .error {
-      background-color: #4a3a3a;
-      border: 1px solid #5a4a4a;
-      color: #ff7777;
-    }
-    .success {
-      background-color: #3a4a3a;
-      border: 1px solid #4a5a4a;
-      color: #77ff77;
-    }
-    code {
-      background-color: #1a1a1a;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Consolas', 'Monaco', monospace;
-    }
-    .instructions {
-      text-align: left;
-      background-color: #3a3a4a;
-      padding: 20px;
-      border-radius: 5px;
-      margin-top: 20px;
-    }
-    .instructions h3 {
-      margin-top: 0;
-      color: #9b77ff;
-    }
-    .instructions ol {
-      margin: 10px 0;
-      padding-left: 20px;
-    }
-    .instructions li {
-      margin: 8px 0;
-    }
-    .spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid #444;
-      border-top-color: #9b77ff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-right: 10px;
-      vertical-align: middle;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+  </script>
+
+  <!-- Font Awesome - Icon library for UI elements -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="stylesheet" href="src/styles/styles.css">
 </head>
-<body>
-  <div class="container">
-    <h1>D.A.V.E</h1>
-    <p class="subtitle">Digital Assets Viewer Extraordinaire</p>
-    
-    <div id="status" class="status checking">
-      <span class="spinner"></span>
-      Checking if server is running...
+<body class="dark-mode">
+  <!-- Top bar with header and all UI controls -->
+  <div id="topBar">
+    <div class="logo-container">
+      <div class="logo-main">D.A.V.E</div>
+      <div class="logo-subtitle">Digital Assets Viewer Extraordiner</div>
     </div>
-    
-    <div class="instructions">
-      <h3>How to Start Dave:</h3>
-      <ol>
-        <li>Open a terminal/command prompt</li>
-        <li>Navigate to the Dave directory</li>
-        <li>Run one of these commands:
-          <ul>
-            <li><strong>Windows:</strong> <code>scripts\Dave.bat</code></li>
-            <li><strong>Mac/Linux:</strong> <code>./scripts/Dave.sh</code></li>
-            <li><strong>Or directly:</strong> <code>node scripts/server.cjs</code></li>
-          </ul>
-        </li>
-        <li>The application will open at <code>http://localhost:7777/</code></li>
-      </ol>
+    <div class="searchControls">
+      <div class="search-wrapper">
+        <i class="fa fa-search search-icon"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by name, type, or path" data-tooltip="Press Ctrl+F to focus">
+        <button class="search-clear" title="Clear search"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="fileControls">
+      <button id="treeFolderToggle" class="btn" title="Toggle Folder Tree View">
+        <i class="fa fa-folder-tree"></i>
+      </button>
+      <button id="folderPicker" class="btn" title="Pick a local folder">
+        <i class="fa fa-folder-open"></i> Local
+      </button>
+      <div class="dropdown">
+        <button id="subfolderToggle" class="btn dropdown-btn" title="Set subfolder depth"><i class="fa fa-sitemap"></i><span></span><i class="fa fa-chevron-down"></i></button>
+        <div id="subfolderDropdown" class="dropdown-content">
+          <label data-depth="off" class="subfolder-option"><i class="fa fa-check subfolder-check"></i>Off</label>
+          <label data-depth="1" class="subfolder-option"><i class="fa fa-check subfolder-check"></i>1</label>
+          <label data-depth="2" class="subfolder-option"><i class="fa fa-check subfolder-check"></i>2</label>
+          <label data-depth="3" class="subfolder-option"><i class="fa fa-check subfolder-check"></i>3</label>
+          <label data-depth="4" class="subfolder-option"><i class="fa fa-check subfolder-check"></i>4</label>
+          <label data-depth="all" class="subfolder-option"><i class="fa fa-check subfolder-check"></i>All</label>
+        </div>
+      </div>
+    </div>
+    <div class="pageControls">
+      <button id="prevPage" class="btn prevPage" disabled data-tooltip="Previous Page (Left Arrow)">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <span id="pageInfo" class="pageInfo">Page 0 of 0</span>
+      <button id="nextPage" class="btn nextPage" disabled data-tooltip="Next Page (Right Arrow)">
+        <i class="fa fa-chevron-right"></i>
+      </button>
+      <div class="dropdown">
+        <button id="itemsPerPageBtn" class="btn dropdown-btn">20 Items <i class="fa fa-chevron-down"></i></button>
+        <div id="itemsDropdown" class="dropdown-content">
+          <label data-value="20" class="items-option"><i class="fa fa-check items-check"></i>20 Items</label>
+          <label data-value="50" class="items-option"><i class="fa fa-check items-check"></i>50 Items</label>
+          <label data-value="100" class="items-option"><i class="fa fa-check items-check"></i>100 Items</label>
+          <label data-value="150" class="items-option"><i class="fa fa-check items-check"></i>150 Items</label>
+        </div>
+      </div>
+    </div>
+    <div class="controls-group">
+      <div class="size-control">
+        <input type="range" id="sizeSlider" min="150" max="400" value="220" class="size-slider">
+        <span id="sizeValue">220px</span>
+      </div>
+      <div class="dropdown">
+        <button id="selectionDropdown" class="btn dropdown-btn">0 Selected <i class="fa fa-chevron-down"></i></button>
+        <div class="dropdown-content">
+          <label class="selection-option" data-action="download">
+            <i class="fa fa-download"></i>
+            <span>Download Selected</span>
+          </label>
+          <label class="selection-option" data-action="save">
+            <i class="fa fa-file-text"></i>
+            <span>Save Selection</span>
+          </label>
+          <label class="selection-option" data-action="clear">
+            <i class="fa fa-times"></i>
+            <span>Clear Selection</span>
+          </label>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="sortBtn" class="btn dropdown-btn"><i class="fa fa-sort"></i> <i class="fa fa-chevron-down"></i></button>
+        <div id="sortDropdown" class="dropdown-content">
+          <label data-value="name" class="sort-option" ><i class="fa fa-check"></i>Name</label>
+          <label data-value="size" class="sort-option"><i class="fa fa-check"></i>Size</label>
+          <label data-value="type" class="sort-option"><i class="fa fa-check"></i>Type</label>
+          <label data-value="date" class="sort-option"><i class="fa fa-check"></i>Date</label>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="assetTypeFilterToggleBtn" class="btn dropdown-btn" title="Toggle asset type visibility"><i class="fa fa-eye"></i> <i class="fa fa-chevron-down"></i></button>
+        <div class="dropdown-content">
+          <label class="filter-option" data-type="fbx">
+            <i class="fa fa-check"></i>
+            <span>FBX</span>
+          </label>
+          <label class="filter-option" data-type="glb">
+            <i class="fa fa-check"></i>
+            <span>GLB</span>
+          </label>
+          <label class="filter-option" data-type="video">
+            <i class="fa fa-check"></i>
+            <span>Video</span>
+          </label>
+          <label class="filter-option" data-type="mp3">
+            <i class="fa fa-check"></i>
+            <span>MP3</span>
+          </label>
+          <label class="filter-option" data-type="wav">
+            <i class="fa fa-check"></i>
+            <span>WAV</span>
+          </label>
+          <label class="filter-option" data-type="ogg">
+            <i class="fa fa-check"></i>
+            <span>OGG</span>
+          </label>
+          <label class="filter-option" data-type="image">
+            <i class="fa fa-check"></i>
+            <span>Images</span>
+          </label>
+          <label class="filter-option" data-type="font">
+            <i class="fa fa-check"></i>
+            <span>Fonts</span>
+          </label>
+        </div>
+      </div>
+      <button id="darkModeToggle" class="btn" title="Toggle dark mode">
+        <i class="fa fa-moon"></i>
+      </button>
     </div>
   </div>
 
-  <script>
-    // Check if server is running and redirect if it is
-    function checkServer() {
-      const statusEl = document.getElementById('status');
-      
-      fetch('http://localhost:7777/')
-        .then(response => {
-          if (response.ok) {
-            statusEl.className = 'status success';
-            statusEl.innerHTML = '✓ Server is running! Redirecting...';
-            setTimeout(() => {
-              window.location.href = 'http://localhost:7777/';
-            }, 1000);
-          }
-        })
-        .catch(error => {
-          statusEl.className = 'status error';
-          statusEl.innerHTML = '✗ Server is not running. Please start it using the instructions below.';
-          
-          // Check again in 3 seconds
-          setTimeout(checkServer, 3000);
-        });
-    }
+  <!-- Tree Folder View Panel -->
+  <div id="treeFolderPanel" class="tree-folder-panel panel-left">
+    <div class="tree-folder-header">
+      <div class="tree-folder-actions">
+        <button id="treeCollapseAll" class="btn tree-btn" title="Collapse All Folders (Ctrl+Shift+LeftArrow)">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="custom-fa-icon">
+                <title>Collapse All - FA Style</title>
+                <path class="folder-shape-fa" d="M4,4 C2.895,4 2,4.895 2,6 L2,26 C2,27.105 2.895,28 4,28 L28,28 C29.105,28 30,27.105 30,26 L30,9 C30,7.895 29.105,7 28,7 L15,7 L12,4 L4,4 Z"/>
+                <polyline class="chevron-overlay-fa" points="13 13 17 17 13 21" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <button id="treeExpandAll" class="btn tree-btn" title="Expand All Folders (Ctrl+Shift+RightArrow)">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="custom-fa-icon">
+                <title>Expand All - FA Style</title>
+                <path class="folder-shape-fa" d="M2,10 L2,26 C2,27.105 2.895,28 4,28 L28,28 C29.105,28 30,27.105 30,26 L30,10 Z"/>
+                <path class="folder-shape-fa" d="M28,7 L15,7 L12,4 L4,4 C2.895,4 2,4.895 2,6 L2,12 L30,12 L30,9 C30,7.895 29.105,7 28,7 Z"/>
+                <polyline class="chevron-overlay-fa" points="12 18 16 22 20 18" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <button id="treeDownloadFolder" class="btn tree-btn" title="Download Selected Folder (Ctrl+Shift+S)">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="custom-fa-icon">
+                <title>Download Folder - ZIP FA Style</title>
+                <path class="folder-shape-fa" d="M4,4 C2.895,4 2,4.895 2,6 L2,26 C2,27.105 2.895,28 4,28 L28,28 C29.105,28 30,27.105 30,26 L30,9 C30,7.895 29.105,7 28,7 L15,7 L12,4 L4,4 Z"/>
+                <text class="text-overlay-fa" x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="8" font-family="sans-serif" font-weight="bold">ZIP</text>
+            </svg>
+        </button>
+        <button id="treeSideToggle" class="btn tree-btn" title="Toggle Panel Position (Left/Right)">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </button>
+        <button id="treeClosePanel" class="btn tree-btn" title="Close Panel (Esc when panel focused)">
+            <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <div class="tree-folder-content">
+      <div class="tree-empty-state">
+        <i class="fa fa-folder-open fa-3x"></i>
+        <p>Drag a local folder here to browse.</p>
+      </div>
+      <div class="tree-container" id="folderTreeContainer" role="tree" aria-label="File and folder structure">
+        <!-- Tree structure will be populated here by JavaScript -->
+      </div>
+    </div>
+    <div class="tree-folder-resizer" id="treeFolderResizer"></div>
+  </div>
+
+  <div id="viewerContainer"></div>
+
+  <!-- Fullscreen overlay -->
+  <div id="fullscreenOverlay" style="opacity: 0">
+    <button id="returnButton" title="Return to grid">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+    <div id="fullscreenContent">
+      <div id="prevNav" class="fullscreen-nav" data-tooltip="Previous (Left Arrow)">
+        <i class="fa fa-chevron-left"></i>
+      </div>
+      <div id="fullscreenViewer"></div>
+      <video id="fullscreenVideo" controls style="display:none;" data-tooltip="Space to Play/Pause"></video>
+      <div id="nextNav" class="fullscreen-nav" data-tooltip="Next (Right Arrow)">
+        <i class="fa fa-chevron-right"></i>
+      </div>
+    </div>
+    <!-- File information panel for fullscreen mode -->
+    <div id="fullscreenInfo" class="fullscreen-info">
+      <div class="fullscreen-filename"></div>
+      <div class="fullscreen-details"></div>
+      <div class="fullscreen-path"></div>
+    </div>
     
-    // Start checking immediately
-    checkServer();
-  </script>
+    <!-- Font size control panel for fullscreen mode (will be shown only for fonts) -->
+    <div id="fullscreenFontSizeControl" class="fullscreen-font-size-control" style="display:none;">
+      <label>Size: <span id="fullscreenFontSizeValue">40</span>px</label>
+      <input type="range" id="fullscreenFontSizeSlider" min="8" max="120" value="40" class="font-size-slider">
+    </div>
+  </div>
+
+  <script type="module" src="src/core/main.js"></script>
+  
+
+  <!-- Custom Text Modal for Font Preview -->
+  <div id="customTextModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span id="customTextModalCloseButton" class="close-button" title="Close">&times;</span>
+      <h2>Font Preview Settings</h2>
+      
+      <div class="input-container">
+        <textarea id="customTextInput" placeholder="Enter custom text..."></textarea>
+      </div>
+      
+      <div class="controls-row">
+        <div class="preset-buttons icon-button-group">
+          <button data-text="The quick brown fox jumps over the lazy dog" title="Pangram - Sample sentence with all letters">
+            <i class="fas fa-quote-left"></i>
+          </button>
+          <button data-text="ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz" title="Alphabet - Full character set">
+            <i class="fas fa-font"></i>
+          </button>
+          <button data-text="0123456789 !@#$%^&*()_+-=[]{}|;:,./<>?" title="Numerals & Symbols">
+            <i class="fas fa-hashtag"></i>
+          </button>
+          
+          <button class="btn preset-text-btn" data-text="Start!">Start!</button>
+          <button class="btn preset-text-btn" data-text="Play Now!">Play Now!</button>
+        </div>
+      </div>
+      
+      <div class="font-size-control">
+        <label for="fontSizeSlider" title="Adjust Font Size"><i class="fas fa-text-height"></i></label>
+        <input type="range" id="fontSizeSlider" min="8" max="72" value="16" class="font-size-slider">
+        <span id="fontSizeValue" class="font-size-value-display">16px</span>
+      </div>
+      
+      <div class="modal-actions">
+        <div class="default-options">
+          <label class="icon-checkbox-label" title="Use this text as default for all fonts">
+            <input type="checkbox" id="saveAsDefaultFontText">
+            <i class="fas fa-globe"></i><i class="fas fa-font"></i>
+          </label>
+          <label class="icon-checkbox-label" title="Use this size as default for all fonts">
+            <input type="checkbox" id="saveAsDefaultFontSize">
+            <i class="fas fa-globe"></i><i class="fas fa-text-height"></i>
+          </label>
+          <label class="icon-checkbox-label" title="Toggle All Caps">
+            <input type="checkbox" id="toggleAllCapsText">
+            <span class="all-caps-icon">Aa</span>
+          </label>
+        </div>
+        <button id="applyCustomFontTextButton" class="btn apply-btn">
+          <i class="fas fa-check"></i> Apply
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
