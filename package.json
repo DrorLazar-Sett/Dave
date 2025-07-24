@@ -2,7 +2,7 @@
   "name": "dave-digital-assets-viewer",
   "version": "1.0.0",
   "description": "Digital Assets Viewer Extraordinaire - A client-side web application for viewing and managing digital assets",
-  "main": "src/index.html",
+  "main": "index.html",
   "type": "module",
   "scripts": {
     "start": "node scripts/server.cjs",

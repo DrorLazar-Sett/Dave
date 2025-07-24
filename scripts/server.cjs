@@ -36,7 +36,7 @@ const server = http.createServer((req, res) => {
   
   // Default to index.html if root path
   if (pathname === '/') {
-    pathname = '/src/index.html';
+    pathname = '/index.html';
   }
   
   // URL rewriting for resources referenced from index.html

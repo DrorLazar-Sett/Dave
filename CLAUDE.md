@@ -48,7 +48,7 @@ npm run test:report         # View HTML test report
 ## Architecture
 
 ### Module Structure
-- **Entry Point**: `src/index.html` - Main HTML file with import maps for Three.js
+- **Entry Point**: `index.html` - Main HTML file with import maps for Three.js
 - **Core Modules**: `src/core/` - Application core (main.js, ui.js, state.js, asset_loading.js)
 - **Asset Handlers**: `src/handlers/` - Factory pattern for handling different file types
   - `BaseAssetHandler.js` - Abstract base class
