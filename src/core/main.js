@@ -6,6 +6,7 @@ import * as TreeFolderView from '../viewers/tree_folder_view.js';
 import { KeyboardShortcutManager, setupNavigationShortcuts, GridNavigator } from '../utils/keyboardShortcuts.js';
 import { errorHandler } from '../utils/errorHandler.js';
 import { memoryManager } from '../utils/memoryManager.js';
+import { initHelpTooltip } from '../utils/helpTooltip.js';
 
 // Global debugging configuration
 window.APP_DEBUG = {
@@ -36,8 +37,19 @@ window.APP_DEBUG = {
 
 // Initialize UI and set up event listeners
 UI.initializeUI().then(() => {
+  console.log('[Main] UI initialized successfully');
+  
   // Initialize tree folder view
   TreeFolderView.initTreeFolderView();
+  console.log('[Main] Tree folder view initialized');
+  
+  // Initialize help tooltip with error handling
+  try {
+    initHelpTooltip();
+  } catch (error) {
+    console.error('[Main] Error initializing help tooltip:', error);
+    // Continue with app initialization even if tooltip fails
+  }
   
   // Initial render
   AssetLoading.renderPage(UI.getCurrentPage());

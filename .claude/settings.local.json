@@ -46,7 +46,8 @@
       "WebFetch(domain:favicon.cc)",
       "Bash(tar:*)",
       "Bash(ffmpeg:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(timeout:*)"
     ],
     "deny": []
   }
