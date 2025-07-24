@@ -117,6 +117,26 @@
     </div>
   </div>
 
+  <!-- Counter.dev Analytics - Privacy-focused, free analytics -->
+  <script>
+    // Only track if not on localhost and user hasn't opted out via Do Not Track
+    if (window.location.hostname !== 'localhost' && 
+        window.location.hostname !== '127.0.0.1' && 
+        navigator.doNotTrack !== '1' && 
+        window.doNotTrack !== '1') {
+      (function() {
+        var script = document.createElement('script');
+        script.src = 'https://counter.dev/script.js';
+        script.setAttribute('data-id', 'dave-digital-assets-viewer');
+        script.setAttribute('data-utcoffset', '0');
+        script.onerror = function() {
+          console.warn('Analytics script failed to load');
+        };
+        document.head.appendChild(script);
+      })();
+    }
+  </script>
+
   <script>
     // Check if server is running and redirect if it is
     function checkServer() {
