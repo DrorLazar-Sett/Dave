@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dave has moved</title>
+<link rel="canonical" href="https://drorlazar.github.io/Dave/">
+<script>
+  // Forward to the new home, preserving any sub-path, ?query and #hash
+  // (the /dave helper relies on ?server=localhost:7778&file=...).
+  (function () {
+    var NEW_BASE = 'https://drorlazar.github.io/Dave/';
+    var rest = location.pathname.replace(/^\/Dave\/?/, '');
+    location.replace(NEW_BASE + rest + location.search + location.hash);
+  })();
+</script>
+<meta http-equiv="refresh" content="0; url=https://drorlazar.github.io/Dave/">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+         max-width: 34rem; margin: 20vh auto; padding: 0 1.5rem; line-height: 1.6;
+         color: #24292f; background: #fff; }
+  a { color: #0969da; }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e6edf3; background: #0d1117; }
+    a { color: #4493f8; }
+  }
+</style>
+</head>
+<body>
+<h1>Dave has moved</h1>
+<p>Redirecting to <a href="https://drorlazar.github.io/Dave/">https://drorlazar.github.io/Dave/</a>&hellip;</p>
+<p>If you are not redirected automatically, follow the link above.</p>
+</body>
+</html>
